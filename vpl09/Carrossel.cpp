@@ -13,7 +13,8 @@ std::string Carrossel::tipo() const {
 void Carrossel::imprimir_status() const {
     std::string state = this->_pausado ? "pausado" : "ativo";
 
-    std::cout   << this->codigo() << " " 
+    std::cout   << std::fixed << std::setprecision(2)
+                << this->codigo() << " " 
                 << this->tipo() << " " 
                 << this->ano() << " "
                 << this->capacidade() << " "
@@ -24,6 +25,6 @@ void Carrossel::imprimir_status() const {
 
 void Carrossel::operar_tick(int demanda, int& atendidos, double& receita, double& energia) {
     receita += (6.00 + 0.75 * _bichos) * demanda;
-    energia -= 0.3 * this->potencia_kw();
+    energia += 0.3 * this->potencia_kw();
     atendidos += demanda;
 }

@@ -20,10 +20,6 @@ int main() {
         string line, comando;
         getline(cin, line);
 
-        // o comando nn é uma string ainda e ss um objeto do ss
-        // nn posso usar para comparar
-        // preciso usar o operador >> para tirar a 1 PALAVRA e guarda-la em uma variavel do tipo string
-
         stringstream ss(line);
         ss >> comando; // extrai a 1 PALAVRA -> no caso o comando principal
 
@@ -37,26 +33,32 @@ int main() {
             ss >> numNovosBrinquedos; // pega agora a 2 PALAVRA
 
             for(int i=0; i<numNovosBrinquedos; i++){
-                string aux, cod;
-                int ano, kw, cap, special;
 
-                ss >> aux >> cod >> ano >> kw >> cap >> special;
+                string lineBrinquedo;
+                getline(cin, lineBrinquedo);
+                stringstream ss_brinquedo(lineBrinquedo);
+
+                string aux, cod;
+                int ano, cap, special;
+                double kw;
+
+                ss_brinquedo >> aux >> cod >> ano >> kw >> cap >> special;
 
                 if(aux == "mr"){
                     Brinquedo* newMr = new MontanhaRussa(cod, ano, kw, cap, special);
-
+                    
                     ThiagoCarreroWorld->adicionar(newMr);
                 }
 
                 else if(aux == "car"){
                     Brinquedo* newCar = new Carrossel(cod, ano, kw, cap, special);
-
+                    
                     ThiagoCarreroWorld->adicionar(newCar);
                 }
 
                 else if(aux == "rod"){
                     Brinquedo* newRod = new RodaGigante(cod, ano, kw, cap, special);
-
+                     
                     ThiagoCarreroWorld->adicionar(newRod);
                 }
             }

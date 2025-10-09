@@ -74,7 +74,7 @@ void Parque::rodar(int T) {
         int demanda_pendente = _demanda;
 
         for (int k=0; k<_num_brinquedos; k++){
-            if(! _brinquedos[k]->pausado()){
+            if(_brinquedos[k]->pausado() == false){
                 int cap = _brinquedos[k]->capacidade();
 
                 if(cap < demanda_pendente) {
@@ -91,8 +91,10 @@ void Parque::rodar(int T) {
                         _atendidos_acum, 
                         _receita_acum, 
                         _energia_acum);
-                    demanda_pendente -= 0;
+                    demanda_pendente = 0;
                 }
+            } else {
+                continue;
             }
         }
     }
@@ -109,9 +111,8 @@ void Parque::status(const std::string& cod) const {
 }
 
 void Parque::painel() const {
-    // Use <iomanip> para imprimir os
-    // acumuladores do parque no formato com 2 casas decimais.
-    std::cout   << this->_energia_acum << " " 
+    std::cout   << std::fixed << std::setprecision(2)   
+                << this->_energia_acum << " " 
                 << this->_receita_acum << " " 
                 << this->_atendidos_acum << std::endl;
 }

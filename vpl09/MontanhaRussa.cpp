@@ -14,7 +14,8 @@ std::string MontanhaRussa::tipo() const {
 void MontanhaRussa::imprimir_status() const {
     std::string state = this->pausado() ? "pausado" : "ativo";
 
-    std::cout   << this->codigo() << " " 
+    std::cout   << std::fixed << std::setprecision(2)
+                << this->codigo() << " " 
                 << this->tipo() << " " 
                 << this->ano() << " "
                 << this->capacidade() << " "
@@ -25,6 +26,6 @@ void MontanhaRussa::imprimir_status() const {
 
 void MontanhaRussa::operar_tick(int demanda, int& atendidos, double& receita, double& energia) {
     receita += (12.00 + 0.25 * _loops) * demanda;
-    energia -= 0.8 * this->potencia_kw();
+    energia += 0.8 * this->potencia_kw();
     atendidos += demanda;
 }
